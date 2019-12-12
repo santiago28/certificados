@@ -1,0 +1,262 @@
+﻿.card-header {
+    background-color: #001f37;
+}
+
+.card {
+    border: solid 2px;
+    border-color: #001f37;
+}
+
+#reg {
+    background-color: #91958F;
+    border: solid 4px;
+    border-color: #91958F;
+    border-radius: 5px;
+}
+
+#ConsultarCertificados {
+    background-color: #001f37;
+    border: solid 4px;
+    border-color: #001f37;
+    border-radius: 5px;
+}
+
+#bot1 {
+    background-color: #001f37;
+    border: solid 4px;
+    border-color: #001f37;
+    border-radius: 5px;
+}
+
+#bot3 {
+    background-color: #33E782;
+    border: solid 4px;
+    border-color: #33E782;
+    border-radius: 5px;
+}
+
+.form-control {
+    border-color: #001f37;
+    border: solid 1px;
+}
+
+#titulo {
+    color: #001f37;
+}
+
+#titulo1 {
+    color: #001f37;
+}
+
+.card-header {
+    background-color: #001f37;
+}
+
+.card-header {
+    color: #001f37;
+}
+
+.barra-menu {
+    width: 100%;
+    height: 64px;
+    background: #001F37;
+    -webkit-box-shadow: 0px 7px 21px -10px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 7px 21px -10px rgba(0,0,0,0.75);
+    box-shadow: 0px 7px 21px -10px rgba(0,0,0,0.75);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#avatarprincipal {
+    width: 100px;
+    height: 100px;
+    margin: 0px auto 1px;
+    display: block;
+    border-radius: 50%;
+}
+
+.menu-principal {
+    position: fixed;
+    top: 0;
+    left: -1000px;
+    width: 300px;
+    height: 100vh;
+    background: #fff;
+    -webkit-box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    z-index: 1;
+}
+
+
+.menu-principal_1 {
+    position: fixed;
+    top: 0;
+    right: -1000px;
+    width: 300px;
+    height: 100vh;
+    background: #fff;
+    -webkit-box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    box-shadow: 1px 0px 24px -5px rgba(0,0,0,0.75);
+    z-index: 1001;
+}
+
+.items-menu {
+    text-decoration: none !important;
+    color: rgba(0,0,0,0.4);
+    font-weight: bold;
+    transition: all ease .5s;
+}
+
+
+.sobre-menu-principal {
+    background: rgba(0,0,0,0.1);
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 1;
+}
+
+
+.icono-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1;
+    color: #fff;
+}
+
+.menu-principal > .header-menu-principal {
+    width: 100%;
+    height: 25%;
+    background: #001F37;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+    .menu-principal > .header-menu-principal > div {
+        margin-bottom: 20px;
+        margin-left: 20px;
+    }
+
+    .menu-principal > .header-menu-principal > * {
+        color: #fff;
+    }
+
+    .menu-principal > .header-menu-principal > div > img {
+        border-radius: 100%;
+    }
+
+.menu-principal_1 > .body-menu-principal {
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.body-menu-principal {
+    width: 100%;
+    height: 65%;
+    overflow-y: auto;
+}
+
+    .body-menu-principal > .item-menu {
+        width: 96%;
+        height: 60px;
+        background: #fff;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all ease .5s;
+        margin-left: 10px;
+    }
+
+        .body-menu-principal > .item-menu:hover {
+            background: #eee;
+        }
+
+.item-menu > span {
+    margin-left: 10px;
+    color: #001f37;
+}
+
+.item-menu > * {
+    color: rgba(0,0,0,0.5);
+}
+
+.body-menu-principal > .item-menu-titulo {
+    width: 100%;
+    height: 20px;
+    background: #001F37;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all ease .5s;
+}
+
+.item-menu-titulo > span {
+    margin-left: 10px;
+    color: #ffffff;
+    align-items: center;
+}
+
+.footer-menu-principal {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .footer-menu-principal > div {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all ease .5s;
+        background: #001F37;
+    }
+
+        .footer-menu-principal > div > * {
+            color: #fff;
+        }
+
+        .footer-menu-principal > div:hover {
+            background: #001F37;
+        }
+
+#bienvenido {
+    font-family: 'Bellefair';
+    font-size: 28px;
+    color: #001f37;
+}
+
+#titulo1 {
+    font-family: 'Bellefair';
+    font-size: 20px;
+    color: #001f37;
+}
+
+#titulo2 {
+    font-family: 'Bellefair';
+    font-size: 20px;
+    color: #001f37;
+}
+
+/*#tit {
+    font-weight: bold;
+}*/

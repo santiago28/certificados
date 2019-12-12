@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dtreporte" targetNamespace="http://tempuri.org/dtreporte.xsd" xmlns:mstns="http://tempuri.org/dtreporte.xsd" xmlns="http://tempuri.org/dtreporte.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dtreporte" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dtreporte" msprop:Generator_UserDSName="dtreporte">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="certificado" msprop:Generator_TableClassName="certificadoDataTable" msprop:Generator_TableVarName="tablecertificado" msprop:Generator_RowChangedName="certificadoRowChanged" msprop:Generator_TablePropName="certificado" msprop:Generator_RowDeletingName="certificadoRowDeleting" msprop:Generator_RowChangingName="certificadoRowChanging" msprop:Generator_RowEvHandlerName="certificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="certificadoRowDeleted" msprop:Generator_RowClassName="certificadoRow" msprop:Generator_UserTableName="certificado" msprop:Generator_RowEvArgName="certificadoRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="codigo_convenio" msprop:Generator_ColumnVarNameInTable="columncodigo_convenio" msprop:Generator_ColumnPropNameInRow="codigo_convenio" msprop:Generator_ColumnPropNameInTable="codigo_convenioColumn" msprop:Generator_UserColumnName="codigo_convenio" type="xs:string" minOccurs="0" />
+              <xs:element name="nombre" msprop:Generator_ColumnVarNameInTable="columnnombre" msprop:Generator_ColumnPropNameInRow="nombre" msprop:Generator_ColumnPropNameInTable="nombreColumn" msprop:Generator_UserColumnName="nombre" type="xs:string" minOccurs="0" />
+              <xs:element name="documento" msprop:Generator_ColumnVarNameInTable="columndocumento" msprop:Generator_ColumnPropNameInRow="documento" msprop:Generator_ColumnPropNameInTable="documentoColumn" msprop:Generator_UserColumnName="documento" type="xs:string" minOccurs="0" />
+              <xs:element name="numero_contrato" msprop:Generator_ColumnVarNameInTable="columnnumero_contrato" msprop:Generator_ColumnPropNameInRow="numero_contrato" msprop:Generator_ColumnPropNameInTable="numero_contratoColumn" msprop:Generator_UserColumnName="numero_contrato" type="xs:string" minOccurs="0" />
+              <xs:element name="fecha_inicio" msprop:Generator_ColumnVarNameInTable="columnfecha_inicio" msprop:Generator_ColumnPropNameInRow="fecha_inicio" msprop:Generator_ColumnPropNameInTable="fecha_inicioColumn" msprop:Generator_UserColumnName="fecha_inicio" type="xs:string" minOccurs="0" />
+              <xs:element name="fecha_fin" msprop:Generator_ColumnVarNameInTable="columnfecha_fin" msprop:Generator_ColumnPropNameInRow="fecha_fin" msprop:Generator_ColumnPropNameInTable="fecha_finColumn" msprop:Generator_UserColumnName="fecha_fin" type="xs:string" minOccurs="0" />
+              <xs:element name="honorarios" msprop:Generator_ColumnVarNameInTable="columnhonorarios" msprop:Generator_ColumnPropNameInRow="honorarios" msprop:Generator_ColumnPropNameInTable="honorariosColumn" msprop:Generator_UserColumnName="honorarios" type="xs:string" minOccurs="0" />
+              <xs:element name="objeto" msprop:Generator_ColumnVarNameInTable="columnobjeto" msprop:Generator_ColumnPropNameInRow="objeto" msprop:Generator_ColumnPropNameInTable="objetoColumn" msprop:Generator_UserColumnName="objeto" type="xs:string" minOccurs="0" />
+              <xs:element name="fecha_generacion_certificado" msprop:Generator_ColumnVarNameInTable="columnfecha_generacion_certificado" msprop:Generator_ColumnPropNameInRow="fecha_generacion_certificado" msprop:Generator_ColumnPropNameInTable="fecha_generacion_certificadoColumn" msprop:Generator_UserColumnName="fecha_generacion_certificado" type="xs:string" minOccurs="0" />
+              <xs:element name="actividades" msprop:Generator_ColumnVarNameInTable="columnactividades" msprop:Generator_ColumnPropNameInRow="actividades" msprop:Generator_ColumnPropNameInTable="actividadesColumn" msprop:Generator_UserColumnName="actividades" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="texto_certificado" msprop:Generator_TableClassName="texto_certificadoDataTable" msprop:Generator_TableVarName="tabletexto_certificado" msprop:Generator_TablePropName="texto_certificado" msprop:Generator_RowDeletingName="texto_certificadoRowDeleting" msprop:Generator_RowChangingName="texto_certificadoRowChanging" msprop:Generator_RowEvHandlerName="texto_certificadoRowChangeEventHandler" msprop:Generator_RowDeletedName="texto_certificadoRowDeleted" msprop:Generator_UserTableName="texto_certificado" msprop:Generator_RowChangedName="texto_certificadoRowChanged" msprop:Generator_RowEvArgName="texto_certificadoRowChangeEvent" msprop:Generator_RowClassName="texto_certificadoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="texto" msprop:Generator_ColumnVarNameInTable="columntexto" msprop:Generator_ColumnPropNameInRow="texto" msprop:Generator_ColumnPropNameInTable="textoColumn" msprop:Generator_UserColumnName="texto" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
