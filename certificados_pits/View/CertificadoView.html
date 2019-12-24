@@ -1,0 +1,86 @@
+﻿
+    <center>
+        <div class="container">
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-header"></div><br />
+                    <h2> <div class="" id="tit" align="center">Consultar Certificados</div></h2>
+                    <br>
+                    <div class="" id="tit" align="center">
+                        Ingrese sus datos para consultar certificados
+                        <br><br><br>
+                        <center>
+                            <div class="col-md-6">
+                                <div class="form-group" align="left">
+                                    <label>Tipo de Documento de Identidad</label>
+                                    <select class="form-control">
+                                        <option>C.C</option>
+                                        <option>C.E</option>
+                                        <option>P.E.P</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" align="left">
+                                    <label>Número de Documento</label>
+                                    <input type="number" class="form-control"  placeholder="Identificación" ng-model="Persona.documento">
+                                </div>
+                            </div>
+                        </center>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </center>
+    <br>
+    <div class="col-md-12" align="center">
+        <button type="button" class="btn btn-primary" id="reg">Regresar</button>
+        <button type="button" class="btn btn-primary" ng-click="ConsultarCertificados()">Consultar Certificado</button>
+    </div>
+    <br><br><br>
+    <div class="container" id="div_table_certificados" style="display:none;">
+        <div class="card">
+            <!-- <div class="" id="titulo2">Consultar Certificados -->
+            <br>
+            <div class="" id="">
+                <p style="font-weight:bold; font-size:30px">Datos del Usuario</p>
+                <br>
+            </div>
+            <div>
+                <label style="font-weight:bold;">Documento:</label><label>{{DatosPersona.documento}}</label><br />
+                <label style="font-weight:bold;">Nombre:</label><label>{{DatosPersona.nombre}}</label>
+            </div>
+
+            <br><br>
+            <div class="" align="center"><p style="font-weight:bold;">Certificados Contractuales</p></div>
+            <br>
+            <!-- <h5 id="titulo1"> Certificados Contractuales</h5> -->
+            <table id="tablacontrato" class="table table-striped table-bordered" style="width:85%" align="center">
+                <thead>
+                    <tr>
+                        <th>Año</th>
+                        <th>Contrato</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Final</th>
+                        <th>Convenio</th>
+                        <th>Descargar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="contrato in ListaContratos">
+                        <td>{{contrato.anio}}</td>
+                        <td>{{contrato.numero_contrato}}</td>
+                        <td>{{contrato.fecha_inicio.split('T')[0]}}</td>
+                        <td>{{contrato.fecha_fin.split('T')[0]}}</td>
+                        <td>{{contrato.codigo_convenio}} - {{contrato.nombre_convenio}}</td>
+                        <td><a href="View/Certificados.aspx?documento={{contrato.documento}}&numero_contrato={{contrato.numero_contrato}}" target="_blank" class="btn btn-primary">Descargar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+

@@ -62,7 +62,9 @@
     <Compile Include="Modelo\Contrato.cs" />
     <Compile Include="Modelo\Convenio.cs" />
     <Compile Include="Modelo\Modelo.cs" />
+    <Compile Include="Modelo\Parametros.cs" />
     <Compile Include="Modelo\Persona.cs" />
+    <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

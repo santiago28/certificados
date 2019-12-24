@@ -1,0 +1,42 @@
+﻿using Datos.Modelo;
+using LogicaNegocio.LogicaNegocio;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
+
+namespace certificados_pits.Controllers
+{
+    public class UsuarioController : ApiController
+    {
+        [HttpPost]
+        public IHttpActionResult IniciarSesion(Usuario oUsuario)
+        {
+            try
+            {
+                UsuarioBl oUsuarioBl = new UsuarioBl();
+                var respuesta_usuario = oUsuarioBl.IniciarSesion(oUsuario.documento, oUsuario.contrasena);
+                return Ok(new { success = true, respuesta_usuario.Item1, respuesta = respuesta_usuario.Item2 });
+            }
+            catch (Exception exc)
+            {
+                return Ok(new { success = false, exc });
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult ConsultarUsuarios()
+        {
+            try
+            {
+                UsuarioBl oUsuarioBl = new UsuarioBl();
+                return Ok(new { success = true, usuarios = oUsuarioBl.ConsultarUsuarios() });
+            }
+            catch (Exception exc)
+            {
+                return Ok(new { success = false, exc });
+            }
+        }
+    }
+}
