@@ -31,21 +31,19 @@
             </div>
 
             <div class="body-menu-principal">
-                <!--<div class="item-menu" style="display: flex;">
-                    <i i class="material-icons">&#xE886;</i>
-                    <span><a href="gestion_usuarios.html" style="text-decoration: none;">Usuarios</a></span>
-                </div>-->
                 <div class="item-menu" style="display: flex;">
-                    <i i class="material-icons">&#xE8F9;</i>
+                    <i i class="material-icons">extension</i>
                     <span><a href="#/Parametrizacion" style="text-decoration: none;">Parametrización Certificado</a></span>
                 </div>
-
+                <div class="item-menu" style="display: flex;">
+                    <i i class="material-icons">face</i>
+                    <span><a href="#/Usuario" style="text-decoration: none;">Gestión Usuario</a></span>
+                </div>
             </div>
             <div class="footer-menu-principal">
-                <!-- <div><i class="material-icons">&#xE88E;</i></div> -->
-                <div><a class="material-icons">&#xE8AC;</a></div>
-                <div><a class="material-icons">&#xE869;</a></div>
-                <div><a class="material-icons">&#xE869;</a></div>
+                <div><a class="material-icons"></a></div>
+                <div ng-click="CerrarSesion()"><a class="material-icons" style="color:white;" >&#xE8AC;</a></div>
+                <div><a class="material-icons"></a></div>
             </div>
         </div>
     </div>
@@ -92,6 +90,8 @@
 <script src="Modelo/Parametrizacion/ParametrizacionService.js"></script>
 <script src="Modelo/Usuario/Usuario.js"></script>
 <script src="Modelo/Usuario/UsuarioService.js"></script>
+<script src="Modelo/Login/Login.js"></script>
+<script src="Modelo/Login/LoginService.js"></script>
 <script src="js/certificados.js"></script>
 
 <script>

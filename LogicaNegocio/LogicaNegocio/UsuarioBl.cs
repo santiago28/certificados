@@ -14,6 +14,7 @@ namespace LogicaNegocio.LogicaNegocio
         public void GuardarUsuario(Usuario oUsuario)
         {
             var encriptar = SecurityEncode.SecurityEncode.Encriptar(oUsuario.documento);
+            oUsuario.estado = true;
             oUsuario.contrasena = encriptar;
             entity.Usuario.Add(oUsuario);
             entity.SaveChanges();
@@ -49,6 +50,32 @@ namespace LogicaNegocio.LogicaNegocio
             var usuarios = (from i in entity.Usuario
                             select i).ToList();
             return usuarios;
+        }
+
+        public Usuario CambiarEstadoUsuario(Usuario oUsuario)
+        {
+            var usuario = (from i in entity.Usuario
+                           where i.id == oUsuario.id
+                           select i).FirstOrDefault();
+
+            usuario.estado = !usuario.estado;
+            entity.SaveChanges();
+
+            return usuario;
+        }
+
+        public Usuario EditarUsuario(Usuario oUsuario)
+        {
+            var usuario = (from i in entity.Usuario
+                           where i.id == oUsuario.id
+                           select i).FirstOrDefault();
+
+            usuario.documento = oUsuario.documento;
+            usuario.nombre = oUsuario.nombre;
+            usuario.correo_electronico = oUsuario.correo_electronico;
+            usuario.telefono = oUsuario.telefono;
+            entity.SaveChanges();
+            return usuario;
         }
     }
 }

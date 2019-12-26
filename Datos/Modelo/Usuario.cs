@@ -14,6 +14,7 @@ namespace Datos.Modelo
         public int id { get; set; }
 
         public string documento { get; set; }
+        public string nombre { get; set; }
         public string correo_electronico { get; set; }
         public string telefono { get; set; }
         public string contrasena { get; set; }

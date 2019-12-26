@@ -43,7 +43,7 @@
                                 }
                             });
                             bootbox.alert({
-                                message: "Imagen Cargada exitosamente",
+                                message: "Imagen cargada exitosamente",
                                 locale: 'es',
                             });
                         }

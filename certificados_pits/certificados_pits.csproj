@@ -188,6 +188,7 @@
     <Content Include="images\firma.png" />
     <Content Include="images\firma_reporte.png" />
     <Content Include="images\nueva_cabecera.png" />
+    <Content Include="images\pascual_bravo.png" />
     <Content Include="images\pie_pagina.png" />
     <Content Include="images\pie_pagina2.png" />
     <Content Include="js\alasql.js" />
@@ -202,6 +203,8 @@
     <Content Include="Modelo\Certificado\CertificadoService.js" />
     <Content Include="Modelo\Filter.js" />
     <Content Include="Modelo\General.js" />
+    <Content Include="Modelo\Login\Login.js" />
+    <Content Include="Modelo\Login\LoginService.js" />
     <Content Include="Modelo\Parametrizacion\Parametrizacion.js" />
     <Content Include="Modelo\Parametrizacion\ParametrizacionService.js" />
     <Content Include="Modelo\Principal.js" />
@@ -237,6 +240,7 @@
     <Content Include="UploadedFiles\dc4a6dd3-8cdc-4449-a616-d726952203fb.png" />
     <Content Include="View\Certificados.aspx" />
     <Content Include="View\CertificadoView.html" />
+    <Content Include="View\LoginView.html" />
     <Content Include="View\Menu.html" />
     <Content Include="View\ParametrizacionView.html" />
     <Content Include="View\UsuarioView.html" />
@@ -276,6 +280,7 @@
     <Content Include="View\Reportes\dtreporte.xsc">
       <DependentUpon>dtreporte.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="View\Reportes\dtreporte.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
