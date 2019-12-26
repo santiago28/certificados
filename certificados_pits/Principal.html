@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html ng-app="CertificadosApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <link href="css/style.css" rel="stylesheet" />
+    <!--<link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/jquery-ui.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/angular-material.min.css" rel="stylesheet" />
+    <link href="css/ng-table.min.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="PrincipalController">
+    <div class="barra-menu"></div>
+    <div id="MenuPrincipal">
+        <i class="material-icons icono-menu">&#xE5D2;</i>
+        <div class="sobre-menu-principal"></div>
+        <div class="menu-principal">
+            <div class="header-menu-principal">
+                <div>
+                    <!--<img id="avatarprincipal" src="img/log1.png" />-->
+                    <br />
+                    <b>Nombre:&ensp;</b><span id="username">Administrador</span>
+                </div>
+            </div>
+
+            <div class="body-menu-principal">
+                <!--<div class="item-menu" style="display: flex;">
+                    <i i class="material-icons">&#xE886;</i>
+                    <span><a href="gestion_usuarios.html" style="text-decoration: none;">Usuarios</a></span>
+                </div>-->
+                <div class="item-menu" style="display: flex;">
+                    <i i class="material-icons">&#xE8F9;</i>
+                    <span><a href="#/Parametrizacion" style="text-decoration: none;">Parametrización Certificado</a></span>
+                </div>
+
+            </div>
+            <div class="footer-menu-principal">
+                <!-- <div><i class="material-icons">&#xE88E;</i></div> -->
+                <div><a class="material-icons">&#xE8AC;</a></div>
+                <div><a class="material-icons">&#xE869;</a></div>
+                <div><a class="material-icons">&#xE869;</a></div>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div id="main" style="width:100%;padding-top: 35px;">
+            <div ng-view style="margin:0px auto;"></div>
+        </div>
+    </header>
+</body>
+</html>
+<!--<script src="scripts/jquery-1.10.2.js"></script>-->
+<script src="js/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<!--<script src="scripts/main.js"></script>-->
+<!--<script src="scripts/moment.js"></script>-->
+<!--<script src="scripts/bootstrap-datetimepicker.min.js"></script>-->
+<script src="Scripts/angular.min.js"></script>
+<script src="Scripts/angular-animate.min.js"></script>
+<script src="Scripts/angular-aria.min.js"></script>
+<script src="Scripts/angular-material.min.js"></script>
+<script src="Scripts/angular-messages.min.js"></script>
+<script src="Scripts/Angular-Route.js"></script>
+<script src="js/bootbox.min.js"></script>
+<script src="js/bootbox.locales.min.js"></script>
+<script src="scripts/angular-route1.js"></script>
+<script src="scripts/angular-cookies.js"></script>
+<!--<script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/alasql.min.js"></script>
+<script src="scripts/xlsx.core.min.js"></script>
+<script src="scripts/timer.jquery.min.js"></script>
+<script src="scripts/jquery.countdown.js"></script>
+<script src="scripts/Donut3D.js"></script>-->
+<!--Modelos-->
+
+<script src="Modelo/General.js"></script>
+<script src="Modelo/Principal.js"></script>
+<script src="Modelo/Filter.js"></script>
+<script src="Modelo/PrincipalService.js"></script>
+<script src="Modelo/Certificado/Certificado.js"></script>
+<script src="Modelo/Certificado/CertificadoService.js"></script>
+<script src="Modelo/Parametrizacion/Parametrizacion.js"></script>
+<script src="Modelo/Parametrizacion/ParametrizacionService.js"></script>
+<script src="Modelo/Usuario/Usuario.js"></script>
+<script src="Modelo/Usuario/UsuarioService.js"></script>
+<script src="js/certificados.js"></script>
+
+<script>
+    $(".icono-menu").click(function () {
+
+        $(".sobre-menu-principal").fadeIn();
+        $(".menu-principal").animate({
+            left: "0"
+        }, 500);
+    });
+
+    $(".sobre-menu-principal").click(function () {
+
+        $(".sobre-menu-principal").fadeOut();
+        $(".menu-principal").animate({
+            left: "-1000px"
+        }, 500);
+    });
+
+</script>

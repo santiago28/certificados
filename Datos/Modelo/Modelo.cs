@@ -17,6 +17,9 @@ namespace Datos.Modelo
         public virtual DbSet<Contrato> Contrato { get; set; }
         public virtual DbSet<Convenio> Convenio { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<Parametros> Parametros { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,0 +1,35 @@
+﻿<div class="col-md-12" style="margin-top:40px;" id="Registro">
+    <div id="Form_Parametrizacion">
+        <div class="card">
+            <div class="card-header">
+                Parametros Certificados
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nombre Parametro</th>
+                            <th>Valor Parametro</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="parametros in Parametros">
+                            <td>{{parametros.descripcion}}</td>
+                            <td>
+                                <input id="fileUploadWebImage{{parametros.id}}" type="file" accept=".jpg,.png" style="display: none;" />
+                                <input type="hidden" id="imagen{{parametros.id}}" />
+                                <button ng-if="parametros.es_imagen" ng-click="UploadFileWebImage(parametros.id)" class="btn btn-primary">Buscar Imagen</button>
+                                <button ng-if="parametros.es_imagen" ng-click="CargarImagenServidor(parametros.id)" class="btn btn-success">Cargar Imagen Servidor</button>
+                                <img ng-if="parametros.es_imagen" ng-src="../UploadedFiles/{{parametros.valor}}" width="550" height="100" />
+                                <textarea ng-if="!parametros.es_imagen" class="form-control" ng-model="parametros.valor"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" ng-click="GuardarParametros();">Guardar Parametros</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -121,6 +121,9 @@
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,6 +135,9 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
@@ -174,10 +180,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\angular-material.min.css" />
+    <Content Include="css\ng-table.min.css" />
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="images\cabecera.png" />
     <Content Include="images\firma.png" />
+    <Content Include="images\firma_reporte.png" />
     <Content Include="images\nueva_cabecera.png" />
     <Content Include="images\pie_pagina.png" />
     <Content Include="images\pie_pagina2.png" />
@@ -185,6 +194,32 @@
     <Content Include="js\certificados.js" />
     <Content Include="js\UploadFile.js" />
     <Content Include="js\xlsx.js" />
+    <Content Include="js\bootbox.locales.min.js" />
+    <Content Include="js\bootbox.min.js" />
+    <Content Include="js\certificados.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="Modelo\Certificado\Certificado.js" />
+    <Content Include="Modelo\Certificado\CertificadoService.js" />
+    <Content Include="Modelo\Filter.js" />
+    <Content Include="Modelo\General.js" />
+    <Content Include="Modelo\Parametrizacion\Parametrizacion.js" />
+    <Content Include="Modelo\Parametrizacion\ParametrizacionService.js" />
+    <Content Include="Modelo\Principal.js" />
+    <Content Include="Modelo\PrincipalService.js" />
+    <Content Include="Modelo\Usuario\Usuario.js" />
+    <Content Include="Modelo\Usuario\UsuarioService.js" />
+    <Content Include="Principal.html" />
+    <Content Include="scripts\angular-animate.min.js" />
+    <Content Include="scripts\angular-aria.min.js" />
+    <Content Include="scripts\angular-cookies.js" />
+    <Content Include="scripts\angular-material.min.js" />
+    <Content Include="scripts\angular-messages.min.js" />
+    <Content Include="scripts\angular-notify.js" />
+    <Content Include="scripts\Angular-Route.js" />
+    <Content Include="scripts\angular-route1.js" />
+    <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\jquery-1.10.2.js" />
+    <Content Include="scripts\ng-table.js" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -198,7 +233,13 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="UploadedFiles\9808717c-bdce-41a2-96ad-6a1a2c2687af.png" />
+    <Content Include="UploadedFiles\dc4a6dd3-8cdc-4449-a616-d726952203fb.png" />
     <Content Include="View\Certificados.aspx" />
+    <Content Include="View\CertificadoView.html" />
+    <Content Include="View\Menu.html" />
+    <Content Include="View\ParametrizacionView.html" />
+    <Content Include="View\UsuarioView.html" />
     <Content Include="View\ConsultarCertificados.html" />
     <Content Include="View\UploadFile.html" />
     <Content Include="Web.config" />
@@ -207,6 +248,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AmpliacionController.cs" />
     <Compile Include="Controllers\CertificadoController.cs" />
+    <Compile Include="Controllers\ImagenController.cs" />
+    <Compile Include="Controllers\ParametrosController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -300,7 +344,7 @@
     <Error Condition="!Exists('packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

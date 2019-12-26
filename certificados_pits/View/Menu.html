@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Administrador</title>
+</head>
+<body>
+    <div class="barra-menu"></div>
+    <div id="MenuPrincipal">
+        <i class="material-icons icono-menu">&#xE5D2;</i>
+        <div class="sobre-menu-principal"></div>
+        <div class="menu-principal">
+            <div class="header-menu-principal">
+                <div>
+                    <img id="avatarprincipal" src="img/log1.png" />
+                    <br />
+                    <b>Nombre:&ensp;</b><span id="username">Administrador</span>
+                </div>
+            </div>
+
+            <div class="body-menu-principal">
+                <div class="item-menu" style="display: flex;">
+                    <i i class="material-icons">&#xE886;</i>
+                    <span><a href="gestion_usuarios.html" style="text-decoration: none;">Usuarios</a></span>
+                </div>
+                <div class="item-menu" style="display: flex;">
+                    <i i class="material-icons">&#xE8F9;</i>
+                    <span><a href="registro.html" style="text-decoration: none;">Carga Información</a></span>
+                </div>
+
+            </div>
+            <div class="footer-menu-principal">
+                <!-- <div><i class="material-icons">&#xE88E;</i></div> -->
+                <div><a class="material-icons">&#xE8AC;</a></div>
+                <div><a class="material-icons">&#xE869;</a></div>
+                <div><a class="material-icons">&#xE869;</a></div>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br>
+    <div id="bienvenido"><h2 align="center"> Bienvenido Administrador</h2></div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script>
+
+        $(".icono-menu").click(function () {
+
+            $(".sobre-menu-principal").fadeIn();
+            $(".menu-principal").animate({
+                left: "0"
+            }, 500);
+        });
+
+        $(".sobre-menu-principal").click(function () {
+
+            $(".sobre-menu-principal").fadeOut();
+            $(".menu-principal").animate({
+                left: "-1000px"
+            }, 500);
+        });
+
+    </script>
+</body>
+</html>
