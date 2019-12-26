@@ -22,7 +22,6 @@ namespace Datos.Modelo
         [StringLength(50)]
         public string numero_contrato { get; set; }
 
-        public int id_cdp { get; set; }
 
         [StringLength(20)]
         public string rp { get; set; }
