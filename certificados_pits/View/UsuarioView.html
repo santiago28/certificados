@@ -1,6 +1,9 @@
-﻿<div>
-    <div class="Principal Transicion" style="padding-top: 75px !important;">
-        <div class="col-md-12">
+﻿<div class="col-md-12" style="margin-top:40px;" id="Registro">
+    <div class="card">
+        <div class="card-header">
+            <h4>Usuarios</h4>
+        </div>
+        <div class="card-body">
             <div class="col-md-3" style="float:right; margin-left:-1%; padding-right:0px;">
                 <button class="btn btn-primary" id="boton" style="width:100%; height:42px;" ng-click="AbrirModal()">Registrar Usuario</button>
             </div>
@@ -32,6 +35,13 @@
                                 <td>{{datalist.nombre}}</td>
                                 <td>{{datalist.correo_electronico}}</td>
                                 <td>{{datalist.telefono}}</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button class="btn btn-primary" ng-click="CargarDatosUsuario(datalist)">Editar</button>
+                                        <button ng-if="datalist.estado" class='btn btn-success' ng-click="CambiarEstadoUsuario(datalist.id)" id='btn_activo_{{datalist.id}}'>Activo</button>
+                                        <button ng-if="!datalist.estado" class='btn btn-danger' ng-click="CambiarEstadoUsuario(datalist.id)" id='btn_inactivo_{{datalist.id}}'>Inactivo</button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -56,8 +66,42 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal registro usuarios -->
+<div class="modal fade" id="ModalUsuarios" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="font-weight: bold;">Usuarios</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" ng-model="Usuario.id" />
+                <div class="form-group">
+                    <label>Documento</label>
+                    <input type="text" class="form-control" ng-model="Usuario.documento" />
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" ng-model="Usuario.nombre" />
+                </div>
+                <div class="form-group">
+                    <label>Correo electrónico</label>
+                    <input type="text" class="form-control" ng-model="Usuario.correo_electronico" />
+                </div>
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="text" class="form-control" ng-model="Usuario.telefono" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" id="BtnRegistrar" ng-click="GuardarUsuario()">Registrar</button>
+                <button class="btn btn-success" id="BtnEditar" style="display: none;" ng-click="EditarUsuario()">Editar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

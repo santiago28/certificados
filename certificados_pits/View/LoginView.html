@@ -1,0 +1,49 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5" style="background: #f2f2f2;">
+                <div class="card-body text-center">
+                    <h5 class="card-title ">Certificados PITS</h5>
+                    <img class="imgLogoMed" src="../images/pascual_bravo.png" alt="Alcaldía de Medellín" width="290" height="220"><br><br>
+                    <form class="form-signin">
+                        <div class="form-label-group">
+                            <input type="text" class="form-control" ng-model="Usuario.documento">
+                            <label for="inputEmail">Identificación</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" class="form-control" ng-model="Usuario.contrasena">
+                            <label for="inputPassword">Contraseña</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" ng-click="IniciarSesion();">Iniciar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ModalRecuperar" role="dialog">
+    <div class="modal-dialog" style="width: 400px;">
+        <!--Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Recuperar Contraseña</h4>
+            </div>
+            <div class="modal-body" style="overflow: auto;">
+                <div class="form-group">
+                    <label>Correo</label>
+                    <input class="form-control" type="email" ng-model="UsuarioRecuperar.Email" />
+                </div>
+                <div class="form-group">
+                    <label>Cédula</label>
+                    <input class="form-control" type="number" ng-model="UsuarioRecuperar.Cedula" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" ng-click="Recuperar()">Aceptar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

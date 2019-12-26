@@ -17,7 +17,7 @@ namespace certificados_pits.Controllers
             {
                 UsuarioBl oUsuarioBl = new UsuarioBl();
                 var respuesta_usuario = oUsuarioBl.IniciarSesion(oUsuario.documento, oUsuario.contrasena);
-                return Ok(new { success = true, respuesta_usuario.Item1, respuesta = respuesta_usuario.Item2 });
+                return Ok(new { success = true, usuario = respuesta_usuario.Item1, respuesta = respuesta_usuario.Item2 });
             }
             catch (Exception exc)
             {
@@ -32,6 +32,49 @@ namespace certificados_pits.Controllers
             {
                 UsuarioBl oUsuarioBl = new UsuarioBl();
                 return Ok(new { success = true, usuarios = oUsuarioBl.ConsultarUsuarios() });
+            }
+            catch (Exception exc)
+            {
+                return Ok(new { success = false, exc });
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult GuardarUsuario(Usuario oUsuario)
+        {
+            try
+            {
+                UsuarioBl oUsuarioBl = new UsuarioBl();
+                oUsuarioBl.GuardarUsuario(oUsuario);
+                return Ok(new { success = true });
+            }
+            catch (Exception exc)
+            {
+                return Ok(new { success = false, exc });
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CambiarEstadoUsuario(Usuario oUsuario)
+        {
+            try
+            {
+                UsuarioBl oUsuarioBl = new UsuarioBl();
+                return Ok(new { success = true, usuario = oUsuarioBl.CambiarEstadoUsuario(oUsuario) });
+            }
+            catch (Exception exc)
+            {
+                return Ok(new { success = false, exc });
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult EditarUsuario(Usuario oUsuario)
+        {
+            try
+            {
+                UsuarioBl oUsuarioBl = new UsuarioBl();
+                return Ok(new { success = true, usuario = oUsuarioBl.EditarUsuario(oUsuario) });
             }
             catch (Exception exc)
             {
