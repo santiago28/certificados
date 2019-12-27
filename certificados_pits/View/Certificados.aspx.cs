@@ -13,6 +13,7 @@ using System.Data;
 //using System.Reflection.Metadata;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using Datos.DTO;
 
 namespace certificados_pits.View
 {
@@ -48,28 +49,20 @@ namespace certificados_pits.View
                         var parametros = (from i in entity.Parametros
                                           select i).ToList();
 
+
+                        var header_footer_event = new HeaderFooter();
                         using (MemoryStream ms = new MemoryStream())
-                        {
+                        {                            
                             Document document = new Document(PageSize.A4);
-                            document.SetMargins(55f, 55f, 120f, 20f);
+                            document.SetMargins(55f, 55f, 120f, 110f);
                             PdfWriter writer = PdfWriter.GetInstance(document, ms);
-                            iTextSharp.text.Image imageHeader = iTextSharp.text.Image.GetInstance(Server.MapPath("/UploadedFiles/"+ parametros.Where(i => i.parametro == "encabezado").FirstOrDefault().valor));
-
-                            var scalePercent = (((document.PageSize.Width / imageHeader.Width) * 100) - 4);
-
-                            imageHeader.SetAbsolutePosition(0f, 720f);
-                            imageHeader.ScalePercent(scalePercent);
-
-                            iTextSharp.text.Image imageFooter = iTextSharp.text.Image.GetInstance(Server.MapPath("/UploadedFiles/"+ parametros.Where(i => i.parametro == "pie_pagina").FirstOrDefault().valor));
-                            var scalePercent2= (((document.PageSize.Width / imageFooter.Width) * 100) - 4);
-                            imageFooter.SetAbsolutePosition(30f, 0f);
-                            imageFooter.ScalePercent(scalePercent2);
-
+                                                                                  
+                            writer.PageEvent = header_footer_event;
+                            header_footer_event.encabezado = parametros.Where(i => i.parametro == "encabezado").FirstOrDefault().valor;
+                            header_footer_event.pie_pagina = parametros.Where(i => i.parametro == "pie_pagina").FirstOrDefault().valor;
+                            
                             document.Open();
-                            //pruebas primera validación con la márgen
                             var valida1 = writer.GetVerticalPosition(false);
-                            document.Add(imageHeader);
-                            document.Add(imageFooter);
 
                             BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                             Font font = new Font(bf, 11, Font.NORMAL);
@@ -83,7 +76,6 @@ namespace certificados_pits.View
                             BaseFont bf_bold = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                             Font font_bold = new Font(bf, 11, Font.BOLD);
 
-                            //p_title.Add("DIRECCIÓN DE EXTENSIÓN Y PROYECCIÓN SOCIAL");
                             p_title.Add(parametros.Where(i => i.parametro == "titulo_principal").FirstOrDefault().valor);
                             p_title.SetLeading(1, 1);
                             p_title.Alignment = Element.ALIGN_CENTER;
@@ -142,7 +134,7 @@ namespace certificados_pits.View
                             document.Add(p);
 
                             document.Add(Chunk.NEWLINE);
-
+                            HeaderFooter hf = new HeaderFooter();
                             p = new Paragraph(null, font);
                             p.Add(parametros.Where(i => i.parametro == "texto_expedicion").FirstOrDefault().valor);
                             p.SetLeading(1, 1);
@@ -185,65 +177,31 @@ namespace certificados_pits.View
             }
 
         }
+    }
 
-        public static List<string> GetTextJustify(string text, int width)
+    public class HeaderFooter : PdfPageEventHelper
+    {
+        public string encabezado { get; set; }
+        public string pie_pagina { get; set; }
+
+        public override void OnEndPage(PdfWriter writer, Document document)
         {
-            string[] palabras = text.Split(' ');
-            StringBuilder sb1 = new StringBuilder();
-            StringBuilder sb2 = new StringBuilder();
-            int length = palabras.Length;
-            List<string> resultado = new List<string>();
-            for (int i = 0; i < length; i++)
-            {
-                sb1.AppendFormat("{0} ", palabras[i]);
-                if (sb1.ToString().Length > width)
-                {
-                    resultado.Add(sb2.ToString());
-                    sb1 = new StringBuilder();
-                    sb2 = new StringBuilder();
-                    i--;
-                }
-                else
-                {
-                    sb2.AppendFormat("{0} ", palabras[i]);
-                }
-            }
-            resultado.Add(sb2.ToString());
+            //base.OnEndPage(writer, document);
 
-            List<string> resultado2 = new List<string>();
-            string temp;
+            iTextSharp.text.Image imageHeader = iTextSharp.text.Image.GetInstance(HttpContext.Current.Server.MapPath("/UploadedFiles/" + encabezado));
 
-            int index1, index2, salto;
-            string target;
-            int limite = resultado.Count;
-            foreach (var item in resultado)
-            {
-                target = " ";
-                temp = item.ToString().Trim();
-                index1 = 0; index2 = 0; salto = 2;
+            var scalePercent = (((document.PageSize.Width / imageHeader.Width) * 100) - 4);
 
-                if (limite <= 1)
-                {
-                    resultado2.Add(temp);
-                    break;
-                }
-                while (temp.Length <= width)
-                {
-                    if (temp.IndexOf(target, index2) < 0)
-                    {
-                        index1 = 0; index2 = 0;
-                        target = target + " ";
-                        salto++;
-                    }
-                    index1 = temp.IndexOf(target, index2);
-                    temp = temp.Insert(temp.IndexOf(target, index2), " ");
-                    index2 = index1 + salto;
+            imageHeader.SetAbsolutePosition(0f, 720f);
+            imageHeader.ScalePercent(scalePercent);
 
-                }
-                limite--;
-                resultado2.Add(temp);
-            }
-            return resultado2;
+            iTextSharp.text.Image imageFooter = iTextSharp.text.Image.GetInstance(HttpContext.Current.Server.MapPath("/UploadedFiles/" + pie_pagina));
+            var scalePercent2 = (((document.PageSize.Width / imageFooter.Width) * 100) - 4);
+            imageFooter.SetAbsolutePosition(30f, 0f);
+            imageFooter.ScalePercent(scalePercent2);
+
+            document.Add(imageHeader);
+            document.Add(imageFooter);
         }
     }
 }

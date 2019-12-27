@@ -8,6 +8,18 @@
             $scope.curPage = 0;
             $scope.pageSize = 5;
 
+            jQuery('.numbersOnly').keyup(function () {
+                this.value = this.value.replace(/[^0-9\.]/g, '');
+            });
+
+            $scope.LimpiarCampos = function () {
+                $scope.Usuario.id = "";
+                $scope.Usuario.documento = "";
+                $scope.Usuario.nombre = "";
+                $scope.Usuario.correo_electronico = "";
+                $scope.Usuario.telefono = "";
+            }
+
             UsuarioService.ConsultarUsuarios(function (response) {
                 if (response.success == true) {
                     $scope.datalists = response.usuarios;
@@ -18,13 +30,40 @@
             });
 
             $scope.AbrirModal = function () {
+                $scope.LimpiarCampos();
                 $("#BtnRegistrar").show();
                 $("#BtnEditar").hide();
                 $("#ModalUsuarios").modal("show");
+                $("#numero_documento").prop('disabled', false);
             }
 
             $scope.GuardarUsuario = function () {
                 $scope.Usuario.id = null;
+                if ($scope.Usuario.documento == "") {
+                    bootbox.alert({
+                        message: "Ingrese el número de documento de identidad",
+                        locale: 'es',
+                    });
+                    return;
+                }
+                if ($scope.Usuario.nombre == "") {
+                    bootbox.alert({
+                        message: "Ingrese el nombre del usuario",
+                        locale: 'es',
+                    });
+                    return;
+                }
+
+                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                if (regex.test($scope.Usuario.correo_electronico.trim())) {
+
+                } else {
+                    bootbox.alert({
+                        message: "Ingrese un correo electrónico válido",
+                        locale: 'es',
+                    });
+                    return;
+                }
                 UsuarioService.GuardarUsuario($scope.Usuario, function (response) {
                     if (response.success) {
                         bootbox.alert({
@@ -67,11 +106,37 @@
                 $scope.Usuario.telefono = usuario.telefono;
                 $("#BtnRegistrar").hide();
                 $("#BtnEditar").show();
+                $("#numero_documento").prop('disabled', true);
                 $("#ModalUsuarios").modal("show");
 
             }
 
             $scope.EditarUsuario = function () {
+                if ($scope.Usuario.documento == "") {
+                    bootbox.alert({
+                        message: "Ingrese el número de documento de identidad",
+                        locale: 'es',
+                    });
+                    return;
+                }
+                if ($scope.Usuario.nombre == "") {
+                    bootbox.alert({
+                        message: "Ingrese el nombre del usuario",
+                        locale: 'es',
+                    });
+                    return;
+                }
+
+                var regex = /[\w-\.]{2,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}/;
+                if (regex.test($scope.Usuario.correo_electronico.trim())) {
+
+                } else {
+                    bootbox.alert({
+                        message: "Ingrese un correo electrónico válido",
+                        locale: 'es',
+                    });
+                    return;
+                }
                 UsuarioService.EditarUsuario($scope.Usuario, function (response) {
                     if (response.success) {
                         bootbox.alert({

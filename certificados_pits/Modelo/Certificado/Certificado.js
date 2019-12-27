@@ -17,9 +17,17 @@
             $scope.ConsultarCertificados = function () {
                 CertificadoService.ConsultarContratoxDocumento($scope.Persona, function (response) {
                     if (response.success == true) {
-                        $("#div_table_certificados").show();
-                        $scope.ListaContratos = response.contratos;
-                        $scope.DatosPersona = response.persona;
+                        if (response.contratos.length == 0) {
+                            bootbox.alert({
+                                message: "No se encontraron certificados contractuales",
+                                locale: 'es',
+                            });
+                        } else {
+                            $("#div_table_certificados").show();
+                            $scope.ListaContratos = response.contratos;
+                            $scope.DatosPersona = response.persona;
+                        }
+                        
                     }
                 });
             };

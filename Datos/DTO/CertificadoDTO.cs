@@ -21,5 +21,9 @@ namespace Datos.DTO
         public string nombre_convenio { get; set; }
 
         public string documento { get; set; }
+
+        public string encabezado { get; set; }
+
+        public string pie_pagina { get; set; }
     }
 }
