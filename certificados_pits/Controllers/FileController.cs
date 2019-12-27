@@ -135,7 +135,21 @@ namespace certificados_pits.Controllers
                         {
                             Convenio oConvenio = new Convenio();
                             oConvenio.codigo_convenio = values[0];
-                            oConvenio.anio = int.Parse(values[3]);
+                            //oConvenio.anio = int.Parse(values[3]);
+
+                            int anio = 0;
+                            if (int.TryParse(values[10], out anio))
+                            {
+                                oConvenio.anio = anio;
+                            }
+                            else
+                            {
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[3].ToString() };
+                                oListContrato_malos.Add(datos);
+                                continue;
+
+                            }
+
                             oConvenio.nombre = values[1];
 
                             convenio = ContratoBl.Crear_Convenio(oConvenio);
@@ -169,7 +183,7 @@ namespace certificados_pits.Controllers
                             }
                             else
                             {
-                                string[] datos= { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[5].ToString(), values[10].ToString() };
+                                string[] datos= { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[10].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
 
@@ -182,14 +196,26 @@ namespace certificados_pits.Controllers
                             }
                             else
                             {
-                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[5].ToString(), values[3].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[3].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
 
                             }
 
                             oContrato.honorarios_letras = values[11];
-                            oContrato.duracion_dias = double.Parse(values[17]);
+                            //oContrato.duracion_dias = double.Parse(values[17]);
+                            double duracion_dias = 0;
+                            if (double.TryParse(values[17], out duracion_dias))
+                            {
+                                oContrato.duracion_dias = duracion_dias;
+
+                            }
+                            else
+                            {
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[17].ToString() };
+                                oListContrato_malos.Add(datos);
+                                continue;
+                            }
                             DateTime fecha_inicio = new DateTime();
                             if (DateTime.TryParse(values[18], out fecha_inicio))
                             {
@@ -198,7 +224,7 @@ namespace certificados_pits.Controllers
                             }
                             else 
                             {
-                                string[] datos = {values[2].ToString(), values[3].ToString(), values[5].ToString(), values[5].ToString(), values[18].ToString() };
+                                string[] datos = {values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[18].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
                             }
@@ -211,7 +237,7 @@ namespace certificados_pits.Controllers
                             }
                             else
                             {
-                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[5].ToString(), values[21].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[21].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
                             }

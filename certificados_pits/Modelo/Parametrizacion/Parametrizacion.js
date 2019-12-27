@@ -69,10 +69,17 @@
 
 
                             });
-                            alasql('SELECT * INTO XLSX("Reporte Decomisos.xlsx",{headers:true}) FROM ?', [datos]);
+                            alasql('SELECT * INTO XLSX("Registros con problemas.xlsx",{headers:true}) FROM ?', [datos]);
+                            bootbox.alert({
+                                message: "Carga de base de datos exitosa",
+                                locale: 'es',
+                            });
                         }
                         else {
-                            alert('file not uploaded');
+                            bootbox.alert({
+                                message: "Error al cargar el archivo",
+                                locale: 'es',
+                            });
                         }
                     });
                 }

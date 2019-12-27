@@ -95,7 +95,7 @@ namespace certificados_pits.View
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") desde el " + contrato.fecha_inicio.Value.Date.ToString("dd/MM/yyyy") + " hasta el " + contrato.fecha_fin.Value.Date.ToString("dd/MM/yyyy") + ".");
+                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración en días de " +contrato.duracion_dias + " en el año " + contrato.anio + ".");
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
 
@@ -104,7 +104,7 @@ namespace certificados_pits.View
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            p.Add("Honorarios mensuales " + contrato.honorarios_letras + "($" + contrato.honorarios.ToString() + ").");
+                            p.Add("Honorarios mensuales " + contrato.honorarios_letras + " ($" + contrato.honorarios.ToString() + ").");
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
