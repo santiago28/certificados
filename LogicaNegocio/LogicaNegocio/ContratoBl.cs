@@ -13,11 +13,11 @@ namespace LogicaNegocio.LogicaNegocio
     public class ContratoBl
     {
         Modelo entity = new Modelo();
-        public Contrato ConsultarContrato(string nuncontrato, int id_convenio)
+        public Contrato ConsultarContrato(string nuncontrato, int id_convenio, int anio)
         {
            
             var contrato = (from i in entity.Contrato
-                            where i.numero_contrato == nuncontrato && i.id_convenio == id_convenio
+                            where i.numero_contrato == nuncontrato && i.id_convenio == id_convenio && i.anio == anio
                             select i).FirstOrDefault();
             return contrato;
         }

@@ -155,12 +155,13 @@ namespace certificados_pits.Controllers
                             persona = PersonaBl.CrearPersona(oPersona);
                         }
 
-                        var contrato = ContratoBl.ConsultarContrato(values[2], convenio.id);
+                        var contrato = ContratoBl.ConsultarContrato(values[2], convenio.id, int.Parse(values[3]));
                         if (contrato == null)
                         {
                             oContrato.numero_contrato = values[2];
                             oContrato.objeto = values[7];
                             oContrato.actividades = values[8];
+                            
                             double result = 0;
                             if (double.TryParse(values[10],out result))
                             {
@@ -173,9 +174,22 @@ namespace certificados_pits.Controllers
                                 continue;
 
                             }
-                          
+
+                            int anio = 0;
+                            if (int.TryParse(values[3], out anio))
+                            {
+                                oContrato.anio = anio;
+                            }
+                            else
+                            {
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[5].ToString(), values[3].ToString() };
+                                oListContrato_malos.Add(datos);
+                                continue;
+
+                            }
+
                             oContrato.honorarios_letras = values[11];
-                            oContrato.duracion_dias = int.Parse(values[17]);
+                            oContrato.duracion_dias = double.Parse(values[17]);
                             DateTime fecha_inicio = new DateTime();
                             if (DateTime.TryParse(values[18], out fecha_inicio))
                             {
