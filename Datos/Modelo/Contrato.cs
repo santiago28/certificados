@@ -22,7 +22,6 @@ namespace Datos.Modelo
         [StringLength(50)]
         public string numero_contrato { get; set; }
 
-        public int id_cdp { get; set; }
 
         [StringLength(20)]
         public string rp { get; set; }
@@ -68,7 +67,7 @@ namespace Datos.Modelo
         [StringLength(150)]
         public string honorarios_letras { get; set; }
 
-        public int? duracion_dias { get; set; }
+        public double? duracion_dias { get; set; }
 
         public int? duracion_contrato { get; set; }
 
@@ -134,6 +133,8 @@ namespace Datos.Modelo
         public DateTime? fecha_terminacion { get; set; }
 
         public int id_persona { get; set; }
+
+        public int? anio { get; set; }
 
     }
 }

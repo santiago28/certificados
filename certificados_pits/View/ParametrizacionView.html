@@ -1,10 +1,28 @@
-﻿<div class="col-md-12" style="margin-top:40px;" id="Registro">
+﻿<!--<style>
+    .loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url('images/cargando.gif') 50% 50% no-repeat rgb(249,249,249);
+    opacity: .8;
+}
+</style>-->
+<div class="col-md-12" style="margin-top:40px;" id="Registro">
     <div id="Form_Parametrizacion">
         <div class="card">
             <div class="card-header">
                 <h4>Parametros Certificados</h4>
             </div>
+
             <div class="card-body">
+                <div>
+                    <input type="file" id="file" name="file" />
+                    <input type="button" class="button" value="Enviar" id="but_upload">
+                    <!--<div class="loader"></div>-->
+                </div>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -13,6 +31,7 @@
                         </tr>
                     </thead>
                     <tbody>
+
                         <tr ng-repeat="parametros in Parametros">
                             <td>{{parametros.descripcion}}</td>
                             <td>
@@ -23,6 +42,7 @@
                                 <img ng-if="parametros.es_imagen" ng-src="../UploadedFiles/{{parametros.valor}}" width="550" height="100" />
                                 <textarea ng-if="!parametros.es_imagen" class="form-control" ng-model="parametros.valor"></textarea>
                             </td>
+
                         </tr>
                     </tbody>
                 </table>

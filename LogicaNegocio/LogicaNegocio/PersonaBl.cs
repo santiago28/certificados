@@ -18,5 +18,21 @@ namespace LogicaNegocio.LogicaNegocio
                            select i).FirstOrDefault();
             return persona;
         }
+
+        public Persona CrearPersona(Persona oPersona) 
+        {
+            var persona = (from i in entity.Persona
+                         where i.documento == oPersona.documento
+                         select i).FirstOrDefault();
+            if (persona == null)
+            {
+                entity.Persona.Add(oPersona);
+                entity.SaveChanges();
+            }
+
+            persona = oPersona;
+
+            return persona;
+        }
     }
 }
