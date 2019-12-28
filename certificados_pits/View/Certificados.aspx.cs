@@ -14,6 +14,7 @@ using System.Data;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
 using Datos.DTO;
+using System.Globalization;
 
 namespace certificados_pits.View
 {
@@ -51,79 +52,160 @@ namespace certificados_pits.View
 
 
                         var header_footer_event = new HeaderFooter();
+                        var concatenacion_catacteres = "";
                         using (MemoryStream ms = new MemoryStream())
-                        {                            
+                        {
                             Document document = new Document(PageSize.A4);
                             document.SetMargins(55f, 55f, 120f, 110f);
                             PdfWriter writer = PdfWriter.GetInstance(document, ms);
-                                                                                  
+
                             writer.PageEvent = header_footer_event;
                             header_footer_event.encabezado = parametros.Where(i => i.parametro == "encabezado").FirstOrDefault().valor;
                             header_footer_event.pie_pagina = parametros.Where(i => i.parametro == "pie_pagina").FirstOrDefault().valor;
-                            
+
                             document.Open();
                             var valida1 = writer.GetVerticalPosition(false);
 
                             BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                            Font font = new Font(bf, 11, Font.NORMAL);
+                            Font font = FontFactory.GetFont("Arial", size: 10);
                             Paragraph p = new Paragraph(null, font);
 
 
                             BaseFont bf_title = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                            Font font_title = new Font(bf_title, 13, Font.BOLD);
+                            Font font_title = FontFactory.GetFont("Arial", size: 10, Font.BOLD);
                             Paragraph p_title = new Paragraph(null, font_title);
 
                             BaseFont bf_bold = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-                            Font font_bold = new Font(bf, 11, Font.BOLD);
+                            Font font_bold = FontFactory.GetFont("Arial", size: 10, Font.BOLD);
 
+                            
+                            var fecha_actual = DateTime.Now.ToString("dd/MM/yyyy").Split('/');
+                            DateTimeFormatInfo dtinfo = new CultureInfo("es-ES", false).DateTimeFormat;
+                            var nombre_mes = dtinfo.GetMonthName(int.Parse(fecha_actual[1]));
+                            p = new Paragraph(null, font);
+                            concatenacion_catacteres += "Medellín, " + nombre_mes + " " + fecha_actual[0] + " de " + fecha_actual[2];
+                            p.Add("Medellín, " + nombre_mes + " " + fecha_actual[0] + " de "+ fecha_actual[2]);
+                            p.SetLeading(1, 1);
+                            p.Alignment = Element.ALIGN_JUSTIFIED;
+                            document.Add(p);
+
+                            document.Add(Chunk.NEWLINE);
+
+                            concatenacion_catacteres += parametros.Where(i => i.parametro == "titulo_principal").FirstOrDefault().valor;
                             p_title.Add(parametros.Where(i => i.parametro == "titulo_principal").FirstOrDefault().valor);
                             p_title.SetLeading(1, 1);
                             p_title.Alignment = Element.ALIGN_CENTER;
                             document.Add(p_title);
 
-
+                            concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
 
                             p_title = new Paragraph(null, font_title);
-                            //p_title.Add("HACE CONSTAR");
+                            concatenacion_catacteres += parametros.Where(i => i.parametro == "titulo_secundario").FirstOrDefault().valor;
                             p_title.Add(parametros.Where(i => i.parametro == "titulo_secundario").FirstOrDefault().valor);
                             p_title.SetLeading(1, 1);
                             p_title.Alignment = Element.ALIGN_CENTER;
                             document.Add(p_title);
-
+                            concatenacion_catacteres += Chunk.NEWLINE;
+                            concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración en días de " +contrato.duracion_dias + " en el año " + contrato.anio + ".");
+                            concatenacion_catacteres += "Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración en días de " + contrato.duracion_dias + " en el año " + contrato.anio + ".";
+                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración de " + contrato.duracion_dias + " días en el año " + contrato.anio + ".");
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
-
                             document.Add(p);
 
+                            concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            p.Add("Honorarios mensuales " + contrato.honorarios_letras + " ($" + contrato.honorarios.ToString() + ").");
+                            var numero = concatenacion_catacteres.Length;
+                            concatenacion_catacteres += "Honorarios mensuales " + contrato.honorarios_letras.ToLower() + " ($" + contrato.honorarios.ToString() + ").";
+                            var honorarios_conversion = String.Format("{0:#,#.00}", contrato.honorarios);
+                            var h_letras = contrato.honorarios_letras.ToLower().Split(':');
+                            p.Add("Honorarios mensuales" + h_letras[0] + " ($" + honorarios_conversion + ")"+ h_letras[1]);
+                            
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
-
+                            concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            p.Add("Obeto: " + contrato.objeto);
+                            concatenacion_catacteres += "Objeto: " + contrato.objeto;
+                            p.Add("Objeto: " + contrato.objeto);
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
-
+                            concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
 
-                            p = new Paragraph(null, font);
-                            p.Add("Actividades: " + contrato.actividades);
-                            p.SetLeading(1, 1);
-                            p.Alignment = Element.ALIGN_JUSTIFIED;
-                            document.Add(p);
+
+                            concatenacion_catacteres += "Actividades: " + contrato.actividades;
+                            concatenacion_catacteres += Chunk.NEWLINE + parametros.Where(i => i.parametro == "texto_complementario").FirstOrDefault().valor + parametros.Where(i => i.parametro == "texto_expedicion").FirstOrDefault().valor + iTextSharp.text.Image.GetInstance(Server.MapPath("/UploadedFiles/" + parametros.Where(i => i.parametro == "firma").FirstOrDefault().valor)) + parametros.Where(i => i.parametro == "nombre_expide").FirstOrDefault().valor + parametros.Where(i => i.parametro == "cargo_expide").FirstOrDefault().valor;
+
+                            if (concatenacion_catacteres.Length >= 3040)
+                            {
+                                //p = new Paragraph(null, font);
+                                //var texto = "Actividades: " + contrato.actividades;
+                                //int cantidad_espacios = texto.Count(Char.IsWhiteSpace);
+                                //int mitad = (int)(cantidad_espacios / 2);
+                                //var texto_partido = texto.Split(' ')[mitad];
+                                //p.Add("Actividades: " + texto_partido[0]);
+                                //p.SetLeading(1, 1);
+                                //p.Alignment = Element.ALIGN_JUSTIFIED;
+                                //document.Add(p);
+
+                                //document.NewPage();
+
+                                //p = new Paragraph(null, font);
+                                //p.Add("Actividades: " + texto_partido[1]);
+                                //p.SetLeading(1, 1);
+                                //p.Alignment = Element.ALIGN_JUSTIFIED;
+                                //document.Add(p);
+                                var texto = "Actividades: " + contrato.actividades;
+                                var texto_array = texto.Split(' ');
+                                var cantidad_palabras = texto_array.Length;
+                                int mitad = (int)(cantidad_palabras / 2);
+                                string texto1 = "";
+                                string texto2 = "";
+                                for (int i = 0; i < mitad; i++)
+                                {
+                                    texto1 += texto_array[i] + " ";
+                                }
+
+                                for (int i = mitad+1; i < cantidad_palabras; i++)
+                                {
+                                    texto2 += texto_array[i] + " ";
+                                }
+
+                                p = new Paragraph(null, font);
+                                p.Add(texto1);
+                                p.SetLeading(1, 1);
+                                p.Alignment = Element.ALIGN_JUSTIFIED;
+                                document.Add(p);
+
+                                document.NewPage();
+
+                                p = new Paragraph(null, font);
+                                p.Add(texto2);
+                                p.SetLeading(1, 1);
+                                p.Alignment = Element.ALIGN_JUSTIFIED;
+                                document.Add(p);
+
+                            }
+                            else
+                            {
+                                p = new Paragraph(null, font);
+                                p.Add("Actividades: " + contrato.actividades);
+                                p.SetLeading(1, 1);
+                                p.Alignment = Element.ALIGN_JUSTIFIED;
+                                document.Add(p);
+                            }
+
 
                             document.Add(Chunk.NEWLINE);
 
@@ -145,11 +227,13 @@ namespace certificados_pits.View
                             image_firma.ScalePercent(60f);
                             document.Add(image_firma);
 
+
                             p = new Paragraph(null, font_bold);
                             p.Add(parametros.Where(i => i.parametro == "nombre_expide").FirstOrDefault().valor);
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
+
 
                             p = new Paragraph(null, font);
                             p.Add(parametros.Where(i => i.parametro == "cargo_expide").FirstOrDefault().valor);
@@ -157,8 +241,7 @@ namespace certificados_pits.View
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
 
-                            var tamanio = document.PageSize.Height;
-                            var valida = writer.GetVerticalPosition(false);
+
 
                             document.Close();
                             writer.Close();
@@ -177,7 +260,11 @@ namespace certificados_pits.View
             }
 
         }
+
+
     }
+
+
 
     public class HeaderFooter : PdfPageEventHelper
     {

@@ -44,10 +44,8 @@ namespace Datos.Modelo
         [StringLength(100)]
         public string profesion { get; set; }
 
-        [StringLength(3000)]
         public string objeto { get; set; }
 
-        [StringLength(8000)]
         public string actividades { get; set; }
 
         [StringLength(8000)]

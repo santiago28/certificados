@@ -138,7 +138,7 @@ namespace certificados_pits.Controllers
                             //oConvenio.anio = int.Parse(values[3]);
 
                             int anio = 0;
-                            if (int.TryParse(values[10], out anio))
+                            if (int.TryParse(values[3], out anio))
                             {
                                 oConvenio.anio = anio;
                             }
