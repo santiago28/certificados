@@ -175,15 +175,15 @@ namespace certificados_pits.Controllers
                             oContrato.numero_contrato = values[2];
                             oContrato.objeto = values[7];
                             oContrato.actividades = values[8];
-                            
+
                             double result = 0;
-                            if (double.TryParse(values[10],out result))
+                            if (double.TryParse(values[10], out result))
                             {
                                 oContrato.honorarios = result;
                             }
                             else
                             {
-                                string[] datos= { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[10].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[10].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
 
@@ -222,9 +222,9 @@ namespace certificados_pits.Controllers
                                 oContrato.fecha_inicio = fecha_inicio;
 
                             }
-                            else 
+                            else
                             {
-                                string[] datos = {values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[18].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[18].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
                             }
@@ -243,7 +243,8 @@ namespace certificados_pits.Controllers
                             }
 
 
-                            oContrato.fecha_terminacion = DateTime.Parse(values[21]);
+                            //oContrato.fecha_terminacion = DateTime.Parse(values[21]);
+                            oContrato.fecha_terminacion = values[21];
                             oContrato.id_persona = persona.id;
                             oContrato.id_convenio = convenio.id;
 

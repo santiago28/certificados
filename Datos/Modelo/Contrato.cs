@@ -127,8 +127,8 @@ namespace Datos.Modelo
         [StringLength(2000)]
         public string observacion_renuncia { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime? fecha_terminacion { get; set; }
+      
+        public string fecha_terminacion { get; set; }
 
         public int id_persona { get; set; }
 
