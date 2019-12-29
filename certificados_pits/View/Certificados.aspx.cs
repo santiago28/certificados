@@ -68,6 +68,7 @@ namespace certificados_pits.View
 
                             BaseFont bf = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                             Font font = FontFactory.GetFont("Arial", size: 10);
+                            Font font_table = FontFactory.GetFont("Arial", size: 8);
                             Paragraph p = new Paragraph(null, font);
 
 
@@ -143,11 +144,49 @@ namespace certificados_pits.View
                             concatenacion_catacteres += Chunk.NEWLINE;
                             document.Add(Chunk.NEWLINE);
 
-
+                            var concatenacion_sin_actividades = concatenacion_catacteres;
                             concatenacion_catacteres += "Actividades: " + contrato.actividades;
+                            
                             concatenacion_catacteres += Chunk.NEWLINE + parametros.Where(i => i.parametro == "texto_complementario").FirstOrDefault().valor + parametros.Where(i => i.parametro == "texto_expedicion").FirstOrDefault().valor + iTextSharp.text.Image.GetInstance(Server.MapPath("/UploadedFiles/" + parametros.Where(i => i.parametro == "firma").FirstOrDefault().valor)) + parametros.Where(i => i.parametro == "nombre_expide").FirstOrDefault().valor + parametros.Where(i => i.parametro == "cargo_expide").FirstOrDefault().valor;
+                            //Prueba 1
+                            var actividades = "Actividades: " + contrato.actividades;
+                            var actividades_split = actividades.Split(' ');
+                            var texto1 = "";
+                            var texto2 = "";
+                            bool texto_en_dos = false;
+                            foreach (var item in actividades_split)
+                            {
+                                var validacion = concatenacion_sin_actividades += " " + item;
+                                if (!texto_en_dos)
+                                {
+                                    texto1 += " " + item;
+                                }
+                                if (concatenacion_sin_actividades.Length >= 3600)
+                                {
+                                    texto_en_dos = true;
+                                   
+                                    texto2 += " " + item;
+                                }
+                            }
+                            if (texto_en_dos)
+                            {
+                                p = new Paragraph(null, font);
+                                p.Add(texto1);
+                                p.SetLeading(1, 1);
+                                p.Alignment = Element.ALIGN_JUSTIFIED;
+                                document.Add(p);
 
-                            if (concatenacion_catacteres.Length >= 3040)
+                                document.NewPage();
+                                p = new Paragraph(null, font);
+                                p.Add(texto2);
+                                p.SetLeading(1, 1);
+                                p.Alignment = Element.ALIGN_JUSTIFIED;
+                                document.Add(p);
+                            }
+                            else 
+
+                           
+                            if (concatenacion_catacteres.Length >= 3300 &&  !texto_en_dos)
                             {
                                 //p = new Paragraph(null, font);
                                 //var texto = "Actividades: " + contrato.actividades;
@@ -166,24 +205,25 @@ namespace certificados_pits.View
                                 //p.SetLeading(1, 1);
                                 //p.Alignment = Element.ALIGN_JUSTIFIED;
                                 //document.Add(p);
+
                                 var texto = "Actividades: " + contrato.actividades;
                                 var texto_array = texto.Split(' ');
                                 var cantidad_palabras = texto_array.Length;
                                 int mitad = (int)(cantidad_palabras / 2);
-                                string texto1 = "";
-                                string texto2 = "";
+                                string texto1_opcion2 = "";
+                                string texto2_opcion2 = "";
                                 for (int i = 0; i < mitad; i++)
                                 {
-                                    texto1 += texto_array[i] + " ";
+                                    texto1_opcion2 += texto_array[i] + " ";
                                 }
 
-                                for (int i = mitad+1; i < cantidad_palabras; i++)
+                                for (int i = mitad; i < cantidad_palabras; i++)
                                 {
-                                    texto2 += texto_array[i] + " ";
+                                    texto2_opcion2 += texto_array[i] + " ";
                                 }
 
                                 p = new Paragraph(null, font);
-                                p.Add(texto1);
+                                p.Add(texto1_opcion2);
                                 p.SetLeading(1, 1);
                                 p.Alignment = Element.ALIGN_JUSTIFIED;
                                 document.Add(p);
@@ -191,7 +231,7 @@ namespace certificados_pits.View
                                 document.NewPage();
 
                                 p = new Paragraph(null, font);
-                                p.Add(texto2);
+                                p.Add(texto2_opcion2);
                                 p.SetLeading(1, 1);
                                 p.Alignment = Element.ALIGN_JUSTIFIED;
                                 document.Add(p);
@@ -206,6 +246,16 @@ namespace certificados_pits.View
                                 document.Add(p);
                             }
 
+                            //p = new Paragraph(null, font);
+                            //p.Add("Actividades: " + contrato.actividades);
+                            //p.SetLeading(1, 1);
+                            //p.Alignment = Element.ALIGN_JUSTIFIED;
+                            //document.Add(p);
+                            //p = new Paragraph(null, font);
+                            //p.Add(texto1);
+                            //p.SetLeading(1, 1);
+                            //p.Alignment = Element.ALIGN_JUSTIFIED;
+                            //document.Add(p);
 
                             document.Add(Chunk.NEWLINE);
 
@@ -241,6 +291,17 @@ namespace certificados_pits.View
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
 
+                            document.Add(Chunk.NEWLINE);
+                            PdfPTable table = new PdfPTable(2);
+                            table.HorizontalAlignment = 0;
+                            table.WidthPercentage = 70f;
+                            p = new Paragraph(null, font_table);
+                            p.Add("Elaboró: " + parametros.Where(i => i.parametro == "elabora").FirstOrDefault().valor);
+                            table.AddCell(p);
+                            p = new Paragraph(null, font_table);
+                            p.Add("Revisó: " + parametros.Where(i => i.parametro == "revisa").FirstOrDefault().valor);
+                            table.AddCell(p);
+                            document.Add(table);
 
 
                             document.Close();

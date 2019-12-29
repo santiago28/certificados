@@ -63,7 +63,7 @@
                         <th>Año</th>
                         <th>Contrato</th>
                         <th>Fecha Inicio</th>
-                        <th>Fecha Final</th>
+                        <th>Número Días</th>
                         <th>Convenio</th>
                         <th>Descargar</th>
 
@@ -74,8 +74,8 @@
                         <td>{{contrato.anio}}</td>
                         <td>{{contrato.numero_contrato}}</td>
                         <td>{{contrato.fecha_inicio.split('T')[0]}}</td>
-                        <td>{{contrato.fecha_fin.split('T')[0]}}</td>
-                        <td>{{contrato.codigo_convenio}} - {{contrato.nombre_convenio}}</td>
+                        <td>{{contrato.duracion_dias}}</td>
+                        <td>{{contrato.codigo_convenio}}</td>
                         <td><a href="View/Certificados.aspx?documento={{contrato.documento}}&numero_contrato={{contrato.numero_contrato}}" target="_blank" class="btn btn-primary">Descargar</a></td>
                     </tr>
                 </tbody>

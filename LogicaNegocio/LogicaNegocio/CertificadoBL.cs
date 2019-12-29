@@ -35,12 +35,13 @@ namespace LogicaNegocio.LogicaNegocio
 
                 CertificadoDTO oCertificadoDTO = new CertificadoDTO();
                 oCertificadoDTO.codigo_convenio = convenio.codigo_convenio;
-                oCertificadoDTO.anio = convenio.anio;
+                oCertificadoDTO.anio = item.anio;
                 oCertificadoDTO.fecha_inicio = item.fecha_inicio;
                 oCertificadoDTO.fecha_fin = item.fecha_fin;
                 oCertificadoDTO.nombre_convenio = convenio.nombre;
                 oCertificadoDTO.numero_contrato = item.numero_contrato;
                 oCertificadoDTO.documento = persona.documento;
+                oCertificadoDTO.duracion_dias = item.duracion_dias;
                 ListaCertificadoDTO.Add(oCertificadoDTO);
             }
 

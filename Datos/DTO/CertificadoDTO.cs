@@ -25,5 +25,7 @@ namespace Datos.DTO
         public string encabezado { get; set; }
 
         public string pie_pagina { get; set; }
+
+        public double? duracion_dias { get; set; }
     }
 }
