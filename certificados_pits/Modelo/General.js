@@ -1,6 +1,5 @@
 ﻿var URLServices = "https://localhost:44393//api/";
-//var URLServices = "http://10.3.240.88:8082//api/";
-//var URLServices = "http://truckcloud.azurewebsites.net//api/";
+//var URLServices = "http://asesoriayconsultoria.pascualbravo.edu.co:8180//api/";
 var Admin = "admin";
 var Password = "admin";
 
