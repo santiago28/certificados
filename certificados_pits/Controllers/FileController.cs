@@ -229,21 +229,23 @@ namespace certificados_pits.Controllers
                                 continue;
                             }
 
-                            DateTime fecha_fin = new DateTime();
-                            if (DateTime.TryParse(values[21], out fecha_fin))
-                            {
-                                oContrato.fecha_inicio = fecha_fin;
 
-                            }
-                            else
-                            {
-                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[21].ToString() };
-                                oListContrato_malos.Add(datos);
-                                continue;
-                            }
+                            //DateTime fecha_fin = new DateTime();
+                            //if (DateTime.TryParse(values[21], out fecha_fin))
+                            //{
+                            //    oContrato.fecha_fin = fecha_fin;
+
+                            //}
+                            //else
+                            //{
+                            //    string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[21].ToString() };
+                            //    oListContrato_malos.Add(datos);
+                            //    continue;
+                            //}
 
 
                             //oContrato.fecha_terminacion = DateTime.Parse(values[21]);
+                            oContrato.fecha_fin = values[21];
                             oContrato.fecha_terminacion = values[21];
                             oContrato.id_persona = persona.id;
                             oContrato.id_convenio = convenio.id;
