@@ -69,9 +69,7 @@ namespace certificados_pits.Controllers
 
 
                     ContratoBl ContratoBl = new ContratoBl();
-
-
-
+                    //List<Array> oListContrato_malos = new List<Array>();
                     //DataTable dt2 = new DataTable();
                     //dt2.Columns.Add("codigo_convenio");
                     //dt2.Columns.Add("numero_contrato");
@@ -92,18 +90,84 @@ namespace certificados_pits.Controllers
                     //{
                     //    DataRow row;
                     //    row = dt2.NewRow();
-                    //    var d = values[0];
-                    //    row["codigo_convenio"] = values[0];
-                    //    row["numero_contrato"] = values[2];
-                    //    row["anio"] = values[3];
-                    //    row["tipo_documento"] = values[4];
-                    //    row["documento"] = values[5];
-                    //    row["nombre"] = values[6];
+                    //    //var d = values[0];
+
+                    //    int anio = 0;
+                    //    if (int.TryParse(values[0], out anio))
+                    //    {
+                    //        row["anio"] = values[0];
+                    //    }
+                    //    else
+                    //    {
+                    //        string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[0].ToString() };
+                    //        oListContrato_malos.Add(datos);
+                    //        continue;
+
+                    //    }
+
+                    //    double result = 0;
+                    //    if (double.TryParse(values[10], out result))
+                    //    {
+                    //        row["honorarios"] = result;
+                    //    }
+                    //    else
+                    //    {
+                    //        string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[10].ToString() };
+                    //        oListContrato_malos.Add(datos);
+                    //        continue;
+
+                    //    }
+
+                    //    double duracion_dias = 0;
+                    //    if (double.TryParse(values[17], out duracion_dias))
+                    //    {
+                    //        row["duracion_dias"]  = duracion_dias;
+
+                    //    }
+                    //    else
+                    //    {
+                    //        string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[17].ToString() };
+                    //        oListContrato_malos.Add(datos);
+                    //        continue;
+                    //    }
+                    //    DateTime fecha_inicio = new DateTime();
+                    //    if (DateTime.TryParse(values[18], out fecha_inicio))
+                    //    {
+                    //        row["fecha_inicio"] = fecha_inicio;
+
+                    //    }
+                    //    else
+                    //    {
+                    //        string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[18].ToString() };
+                    //        oListContrato_malos.Add(datos);
+                    //        continue;
+                    //    }
+
+
+                    //    //        //DateTime fecha_fin = new DateTime();
+                    //    //        //if (DateTime.TryParse(values[21], out fecha_fin))
+                    //    //        //{
+                    //    //        //    oContrato.fecha_fin = fecha_fin;
+
+                    //    //        //}
+                    //    //        //else
+                    //    //        //{
+                    //    //        //    string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[21].ToString() };
+                    //    //        //    oListContrato_malos.Add(datos);
+                    //    //        //    continue;
+                    //    //        //}
+
+                    //    row["codigo_convenio"] = values[1];
+                    //    row["numero_contrato"] = values[9];
+
+                    //    row["tipo_documento"] = values[3];
+                    //    row["documento"] = values[4];
+                    //    row["nombre"] = values[5];
                     //    row["objeto"] = values[7];
                     //    row["actividades"] = values[8];
-                    //    row["honorarios"] = values[10];
+
                     //    row["honorarios_letras"] = values[11];
-                    //    row["duracion_dias"] = values[17];
+
                     //    row["fecha_inicio"] = values[18];
                     //    row["fecha_real_terminacion"] = values[21];
                     //    dt2.Rows.Add(row);
@@ -134,45 +198,45 @@ namespace certificados_pits.Controllers
                         if (convenio == null)
                         {
                             Convenio oConvenio = new Convenio();
-                            oConvenio.codigo_convenio = values[0];
+                            oConvenio.codigo_convenio = values[1];
                             //oConvenio.anio = int.Parse(values[3]);
 
                             int anio = 0;
-                            if (int.TryParse(values[3], out anio))
+                            if (int.TryParse(values[0], out anio))
                             {
                                 oConvenio.anio = anio;
                             }
                             else
                             {
-                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[3].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[0].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
 
                             }
 
-                            oConvenio.nombre = values[1];
+                            oConvenio.nombre = values[2];
 
                             convenio = ContratoBl.Crear_Convenio(oConvenio);
                         }
 
                         Persona oPersona = new Persona();
                         Contrato oContrato = new Contrato();
-                        oPersona.documento = values[5];
+                        oPersona.documento = values[4];
                         var persona = PersonaBl.ConsultarPersona(oPersona);
 
-                        oPersona.tipo_documento = values[4];
-                        oPersona.documento = values[5];
-                        oPersona.nombre = values[6];
+                        oPersona.tipo_documento = values[3];
+                        oPersona.documento = values[4];
+                        oPersona.nombre = values[5];
 
                         if (persona == null)
                         {
                             persona = PersonaBl.CrearPersona(oPersona);
                         }
 
-                        var contrato = ContratoBl.ConsultarContrato(values[2], convenio.id, int.Parse(values[3]));
+                        var contrato = ContratoBl.ConsultarContrato(values[1], convenio.id, int.Parse(values[0]));
                         if (contrato == null)
                         {
-                            oContrato.numero_contrato = values[2];
+                            oContrato.numero_contrato = values[9];
                             oContrato.objeto = values[7];
                             oContrato.actividades = values[8];
 
@@ -190,13 +254,13 @@ namespace certificados_pits.Controllers
                             }
 
                             int anio = 0;
-                            if (int.TryParse(values[3], out anio))
+                            if (int.TryParse(values[0], out anio))
                             {
                                 oContrato.anio = anio;
                             }
                             else
                             {
-                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[3].ToString() };
+                                string[] datos = { values[2].ToString(), values[3].ToString(), values[5].ToString(), values[6].ToString(), values[0].ToString() };
                                 oListContrato_malos.Add(datos);
                                 continue;
 
@@ -252,7 +316,7 @@ namespace certificados_pits.Controllers
 
                             entity.Contrato.Add(oContrato);
                             entity.SaveChanges();
-                            
+
                         }
 
                     }
