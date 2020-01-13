@@ -124,11 +124,13 @@ namespace certificados_pits.View
 
                             p = new Paragraph(null, font);
                             var numero = concatenacion_catacteres.Length;
-                            concatenacion_catacteres += "Honorarios mensuales " + contrato.honorarios_letras.ToLower() + " ($" + contrato.honorarios.ToString() + ").";
                             var honorarios_conversion = String.Format("{0:#,#.00}", contrato.honorarios);
-                            var h_letras = contrato.honorarios_letras.ToLower().Split(':');
-                            p.Add("Honorarios mensuales" + h_letras[0] + " ($" + honorarios_conversion + ")"+ h_letras[1]);
-                            
+                            concatenacion_catacteres += "Honorarios mensuales son: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").";
+
+                            //var h_letras = contrato.honorarios_letras.ToLower().Split(':');
+                            p.Add("Honorarios mensuales son: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").");
+
+
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
@@ -154,6 +156,7 @@ namespace certificados_pits.View
                             var texto1 = "";
                             var texto2 = "";
                             bool texto_en_dos = false;
+                            var primero = 0;
                             foreach (var item in actividades_split)
                             {
                                 var validacion = concatenacion_sin_actividades += " " + item;
@@ -163,9 +166,13 @@ namespace certificados_pits.View
                                 }
                                 if (concatenacion_sin_actividades.Length >= 3600)
                                 {
-                                    texto_en_dos = true;
                                    
-                                    texto2 += " " + item;
+                                    texto_en_dos = true;
+                                    primero++;
+                                    if (primero > 1)
+                                    {
+                                        texto2 += " " + item;
+                                    }
                                 }
                             }
                             if (texto_en_dos)
