@@ -57,8 +57,8 @@ namespace Datos.Modelo
         [Column(TypeName = "date")]
         public DateTime? fecha_inicio { get; set; }
 
-        //[Column(TypeName = "date")]
-        public string fecha_fin { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? fecha_fin { get; set; }
 
         public double? honorarios { get; set; }
 

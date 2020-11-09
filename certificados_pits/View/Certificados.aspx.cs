@@ -31,16 +31,18 @@ namespace certificados_pits.View
                     Modelo entity = new Modelo();
                     var documento = Request.QueryString["documento"];
                     var numero_contrato = Request.QueryString["numero_contrato"];
+                    var anio = int.Parse(Request.QueryString["anio"]);
 
-                    if (documento != "" && numero_contrato != "")
+                    if (documento != "" && numero_contrato != "" )
                     {
+
 
                         var persona = (from i in entity.Persona
                                        where i.documento == documento
                                        select i).FirstOrDefault();
 
                         var contrato = (from i in entity.Contrato
-                                        where i.id_persona == persona.id && i.numero_contrato == numero_contrato
+                                        where i.id_persona == persona.id && i.numero_contrato == numero_contrato && i.anio == anio 
                                         select i).FirstOrDefault();
 
                         var convenio = (from i in entity.Convenio
@@ -49,6 +51,16 @@ namespace certificados_pits.View
 
                         var parametros = (from i in entity.Parametros
                                           select i).ToList();
+
+                        var valor_actual = int.Parse(parametros.Where(i => i.parametro == "contador").FirstOrDefault().valor);
+                        valor_actual++;
+
+                        var parametro_contador = (from i in entity.Parametros
+                                                  where i.parametro == "contador"
+                                                  select i).FirstOrDefault();
+
+                        parametro_contador.valor = valor_actual.ToString();
+                        entity.SaveChanges();
 
 
                         var header_footer_event = new HeaderFooter();
@@ -79,13 +91,13 @@ namespace certificados_pits.View
                             BaseFont bf_bold = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
                             Font font_bold = FontFactory.GetFont("Arial", size: 10, Font.BOLD);
 
-                            
+
                             var fecha_actual = DateTime.Now.ToString("dd/MM/yyyy").Split('/');
                             DateTimeFormatInfo dtinfo = new CultureInfo("es-ES", false).DateTimeFormat;
                             var nombre_mes = dtinfo.GetMonthName(int.Parse(fecha_actual[1]));
                             p = new Paragraph(null, font);
                             concatenacion_catacteres += "Medellín, " + nombre_mes + " " + fecha_actual[0] + " de " + fecha_actual[2];
-                            p.Add("Medellín, " + nombre_mes + " " + fecha_actual[0] + " de "+ fecha_actual[2]);
+                            p.Add("Medellín, " + nombre_mes + " " + fecha_actual[0] + " de " + fecha_actual[2]);
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
@@ -113,8 +125,16 @@ namespace certificados_pits.View
                             document.Add(Chunk.NEWLINE);
 
                             p = new Paragraph(null, font);
-                            concatenacion_catacteres += "Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración en días de " + contrato.duracion_dias + " en el año " + contrato.anio + ".";
-                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") con una duración de " + contrato.duracion_dias + " días en el año " + contrato.anio + ".");
+                            var fecha_inicio = contrato.fecha_inicio.ToString().Split('/');
+                            var fecha_fin = contrato.fecha_fin.ToString().Split('/');
+
+                            DateTimeFormatInfo dtinfo_certificado = new CultureInfo("es-ES", false).DateTimeFormat;
+
+                            var nombre_inicio_mes = dtinfo.GetMonthName(int.Parse(fecha_inicio[1]));
+                            var nombre_fin_mes = dtinfo.GetMonthName(int.Parse(fecha_fin[1]));
+
+                            concatenacion_catacteres += "Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") desde el " + fecha_inicio[0] + " de " + nombre_inicio_mes + " de " + fecha_inicio[2].Split(' ')[0] + " hasta el " + fecha_fin[0] + " de " + nombre_fin_mes +  " de " + fecha_fin[2].Split(' ')[0] + ".";
+                            p.Add("Que en virtud del Contrato Interadministrativo número " + convenio.codigo_convenio + ". El (La) Señor (a) " + persona.nombre + " con cédula " + persona.documento + ", subscribió un contrato por prestación de servicios (" + contrato.numero_contrato + ") desde el " + fecha_inicio[0] + " de " + nombre_inicio_mes + " de " + fecha_inicio[2].Split(' ')[0] + " hasta el " + fecha_fin[0] + " de " + nombre_fin_mes + " de " + fecha_fin[2].Split(' ')[0] + ".");
                             p.SetLeading(1, 1);
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
@@ -125,10 +145,10 @@ namespace certificados_pits.View
                             p = new Paragraph(null, font);
                             var numero = concatenacion_catacteres.Length;
                             var honorarios_conversion = String.Format("{0:#,#.00}", contrato.honorarios);
-                            concatenacion_catacteres += "Honorarios mensuales son: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").";
+                            concatenacion_catacteres += "El valor mensual de los honorarios fue: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").";
 
                             //var h_letras = contrato.honorarios_letras.ToLower().Split(':');
-                            p.Add("Honorarios mensuales son: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").");
+                            p.Add("El valor mensual de los honorarios fue: ($" + honorarios_conversion + ") (" + contrato.honorarios_letras.ToLower() + ").");
 
 
                             p.SetLeading(1, 1);
@@ -148,7 +168,7 @@ namespace certificados_pits.View
 
                             var concatenacion_sin_actividades = concatenacion_catacteres;
                             concatenacion_catacteres += "Actividades: " + contrato.actividades;
-                            
+
                             concatenacion_catacteres += Chunk.NEWLINE + parametros.Where(i => i.parametro == "texto_complementario").FirstOrDefault().valor + parametros.Where(i => i.parametro == "texto_expedicion").FirstOrDefault().valor + iTextSharp.text.Image.GetInstance(Server.MapPath("/UploadedFiles/" + parametros.Where(i => i.parametro == "firma").FirstOrDefault().valor)) + parametros.Where(i => i.parametro == "nombre_expide").FirstOrDefault().valor + parametros.Where(i => i.parametro == "cargo_expide").FirstOrDefault().valor;
                             //Prueba 1
                             var actividades = "Actividades: " + contrato.actividades;
@@ -166,7 +186,7 @@ namespace certificados_pits.View
                                 }
                                 if (concatenacion_sin_actividades.Length >= 3600)
                                 {
-                                   
+
                                     texto_en_dos = true;
                                     primero++;
                                     if (primero > 1)
@@ -190,10 +210,10 @@ namespace certificados_pits.View
                                 p.Alignment = Element.ALIGN_JUSTIFIED;
                                 document.Add(p);
                             }
-                            else 
+                            else
 
-                           
-                            if (concatenacion_catacteres.Length >= 3300 &&  !texto_en_dos)
+
+                            if (concatenacion_catacteres.Length >= 3300 && !texto_en_dos)
                             {
                                 //p = new Paragraph(null, font);
                                 //var texto = "Actividades: " + contrato.actividades;
@@ -298,17 +318,17 @@ namespace certificados_pits.View
                             p.Alignment = Element.ALIGN_JUSTIFIED;
                             document.Add(p);
 
-                            document.Add(Chunk.NEWLINE);
-                            PdfPTable table = new PdfPTable(2);
-                            table.HorizontalAlignment = 0;
-                            table.WidthPercentage = 70f;
-                            p = new Paragraph(null, font_table);
-                            p.Add("Elaboró: " + parametros.Where(i => i.parametro == "elabora").FirstOrDefault().valor);
-                            table.AddCell(p);
-                            p = new Paragraph(null, font_table);
-                            p.Add("Revisó: " + parametros.Where(i => i.parametro == "revisa").FirstOrDefault().valor);
-                            table.AddCell(p);
-                            document.Add(table);
+                            //document.Add(Chunk.NEWLINE);
+                            //PdfPTable table = new PdfPTable(2);
+                            //table.HorizontalAlignment = 0;
+                            //table.WidthPercentage = 70f;
+                            //p = new Paragraph(null, font_table);
+                            //p.Add("Elaboró: " + parametros.Where(i => i.parametro == "elabora").FirstOrDefault().valor);
+                            //table.AddCell(p);
+                            //p = new Paragraph(null, font_table);
+                            //p.Add("Revisó: " + parametros.Where(i => i.parametro == "revisa").FirstOrDefault().valor);
+                            //table.AddCell(p);
+                            //document.Add(table);
 
 
                             document.Close();

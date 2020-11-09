@@ -15,6 +15,13 @@
             });
 
             $scope.ConsultarCertificados = function () {
+                if ($scope.Persona.documento == "") {
+                    bootbox.alert({
+                        message: "Ingrese documento válido",
+                        locale: 'es',
+                    });
+                    return;
+                }
                 CertificadoService.ConsultarContratoxDocumento($scope.Persona, function (response) {
                     if (response.success == true) {
                         if (response.contratos.length == 0) {

@@ -30,6 +30,12 @@
                         <tr>
                             <td>Carga de base de datos</td>
                             <td>
+                                <div class="text-center" id="cargando" style="display:none">
+                                    <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                                <br />
                                 <div>
                                     <input type="file" class="btn btn-default" id="file" name="file" accept=".xlsx" />
                                     <input type="button" class="button btn btn-success" value="Cargar Datos" id="but_upload">
@@ -45,7 +51,8 @@
                                 <button ng-if="parametros.es_imagen" ng-click="UploadFileWebImage(parametros.id)" class="btn btn-primary">Buscar Imagen</button>
                                 <button ng-if="parametros.es_imagen" ng-click="CargarImagenServidor(parametros.id)" class="btn btn-success">Cargar Imagen Servidor</button>
                                 <img ng-if="parametros.es_imagen" ng-src="../UploadedFiles/{{parametros.valor}}" width="550" height="100" />
-                                <textarea ng-if="!parametros.es_imagen" class="form-control" ng-model="parametros.valor"></textarea>
+                                <textarea ng-if="!parametros.es_imagen&&parametros.parametro!='contador'" class="form-control" ng-model="parametros.valor"></textarea>
+                                <label ng-if="!parametros.es_imagen&&parametros.parametro=='contador'">{{parametros.valor}}</label>
                             </td>
 
                         </tr>

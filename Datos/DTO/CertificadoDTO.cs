@@ -14,7 +14,7 @@ namespace Datos.DTO
 
         public DateTime? fecha_inicio { get; set; }
 
-        public string fecha_fin { get; set; }
+        public DateTime? fecha_fin { get; set; }
 
         public string numero_contrato { get; set; }
 

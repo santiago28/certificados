@@ -30,6 +30,10 @@
                 }).done(function (responseData, textStatus) {
                     callback(responseData);
                     //waitingDialog.hide();
+
+                    waitingDialog.hide();
+
+
                 }).fail(function () {
                     //waitingDialog.hide();
                 });

@@ -58,6 +58,8 @@
                 fd.append('file', files);
 
                 if (fd != null) {
+                    $("#cargando").css("display", "block");
+                    $('#but_upload').attr("disabled", true);
                     ParametrizacionService.SubirExcel(fd, function (response) {
                         if (response.success == true) {
                             var datos = [];
@@ -67,9 +69,12 @@
                                     Nun_contrato: value[0], ano: value[1], documento: value[2], nombre: value[3], dato_malo: value[4]
                                 });
 
-
                             });
-                            alasql('SELECT * INTO XLSX("Registros con problemas.xlsx",{headers:true}) FROM ?', [datos]);
+                            if (datos.length>0) {
+                                alasql('SELECT * INTO XLSX("Registros con problemas.xlsx",{headers:true}) FROM ?', [datos]);
+                            }
+                            $("#cargando").css("display", "none");
+                            $('#but_upload').attr("disabled", false);
                             bootbox.alert({
                                 message: "Carga de base de datos exitosa",
                                 locale: 'es',

@@ -22,7 +22,7 @@ namespace LogicaNegocio.LogicaNegocio
 
         public Tuple<Usuario,int> IniciarSesion(string usuario, string contrasena)
         {
-            var encriptar = SecurityEncode.SecurityEncode.Encriptar(contrasena);
+            var encriptar = SecurityEncode.SecurityEncode.Encriptar(contrasena).ToString();
 
             var datos = (from i in entity.Usuario
                          where i.documento == usuario

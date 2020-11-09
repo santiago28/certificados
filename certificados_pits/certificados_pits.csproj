@@ -37,6 +37,7 @@
       <Objects>
       </Objects>
     </PublishDatabaseSettings>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -185,6 +186,7 @@
     <Content Include="css\style.css" />
     <Content Include="Global.asax" />
     <Content Include="images\cabecera.png" />
+    <Content Include="images\certificados.png" />
     <Content Include="images\firma.png" />
     <Content Include="images\firma_reporte.png" />
     <Content Include="images\nueva_cabecera.png" />
@@ -280,6 +282,7 @@
       <DependentUpon>dtreporte.xsd</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\CustomProfile1.pubxml" />
     <None Include="View\Reportes\dtreporte.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
