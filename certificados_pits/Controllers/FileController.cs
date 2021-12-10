@@ -117,6 +117,10 @@ namespace certificados_pits.Controllers
                         {
                             persona = PersonaBl.CrearPersona(oPersona);
                         }
+                        else
+                        {
+                            persona = PersonaBl.ActualizarPersona(persona);
+                        }
 
                         int anio = 0;
                         if (int.TryParse(values[0], out anio))
@@ -205,6 +209,20 @@ namespace certificados_pits.Controllers
                             contrato.fecha_terminacion = values[21];
                             contrato.objeto = values[7];
                             contrato.actividades = values[8];
+                            //validar formato de double de honorarios
+                            double result = 0;
+                            if (double.TryParse(values[10], out result))
+                            {
+                                contrato.honorarios = result;
+                            }
+                            else
+                            {
+                                string[] datos = { values[9].ToString(), values[0].ToString(), values[4].ToString(), values[5].ToString(), values[10].ToString() };
+                                oListContrato_malos.Add(datos);
+                                continue;
+
+                            }
+                            contrato.honorarios_letras = values[11];
                             DateTime fecha_fin = new DateTime();
                             if (DateTime.TryParse(values[21], out fecha_fin))
                             {

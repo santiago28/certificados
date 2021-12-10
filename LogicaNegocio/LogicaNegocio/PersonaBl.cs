@@ -19,11 +19,11 @@ namespace LogicaNegocio.LogicaNegocio
             return persona;
         }
 
-        public Persona CrearPersona(Persona oPersona) 
+        public Persona CrearPersona(Persona oPersona)
         {
             var persona = (from i in entity.Persona
-                         where i.documento == oPersona.documento
-                         select i).FirstOrDefault();
+                           where i.documento == oPersona.documento
+                           select i).FirstOrDefault();
             if (persona == null)
             {
                 entity.Persona.Add(oPersona);
@@ -34,5 +34,21 @@ namespace LogicaNegocio.LogicaNegocio
 
             return persona;
         }
+
+        public Persona ActualizarPersona(Persona oPersona)
+        {
+            var persona = (from i in entity.Persona
+                           where i.id == oPersona.id
+                           select i).FirstOrDefault();
+
+            if (persona != null)
+            {
+                persona.nombre = oPersona.nombre;
+                entity.Persona.Add(persona);
+                entity.SaveChanges();
+            }
+            return persona;
+        }
+
     }
 }
